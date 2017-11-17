@@ -3,7 +3,8 @@ myApp.controller('LoginController', function($http, $location, UserService) {
     var vm = this;
     vm.user = {
       username: '',
-      password: ''
+      password: '',
+      income: 0      //  just added
     };
     vm.message = '';
 
@@ -20,7 +21,7 @@ myApp.controller('LoginController', function($http, $location, UserService) {
             $location.path('/user'); // http://localhost:5000/#/user
           } else {
             console.log('LoginController -- login -- failure: ', response);
-            vm.message = "Wrong!!";
+            vm.message = "Invalid Credentials!!";
           }
         }).catch(function(response){
           console.log('LoginController -- registerUser -- failure: ', response);
@@ -32,7 +33,7 @@ myApp.controller('LoginController', function($http, $location, UserService) {
     vm.registerUser = function() {
       console.log('LoginController -- registerUser');
       if(vm.user.username === '' || vm.user.password === '') {
-        vm.message = "Choose a username and password!";
+        vm.message = "Please choose a username and password!";
       } else {
         console.log('LoginController -- registerUser -- sending to server...', vm.user);
         $http.post('/register', vm.user).then(function(response) {
