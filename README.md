@@ -42,8 +42,10 @@ Link to a read-only version of your scope document or other relevant documentati
 
 High level list of items completed.
 
-- [x] Feature a
-- [x] Feature b
+- [x] Login
+- [x] Register
+- [ ] Create Budget screen
+ 
 
 ### Next Steps
 
