@@ -26,7 +26,7 @@ myApp.config(function($routeProvider, $locationProvider) {
       templateUrl: '/views/templates/info.html',
       controller: 'InfoController as ic',
       resolve: {
-        getuser : function(UserService){
+        getuser: function (UserService) {
           return UserService.getuser();
         }
       }
@@ -35,7 +35,16 @@ myApp.config(function($routeProvider, $locationProvider) {
       templateUrl: 'views/templates/budget.html',
       controller: 'BudgetController as bc',
       resolve: {
-        getuser : function(UserService){
+        getuser: function (UserService) {
+          return UserService.getuser();
+        }
+      }
+    })
+    .when('/transaction', {
+      templateUrl: 'views/templates/transaction.html',
+      controller: 'TransactionController as tc',
+      resolve: {
+        getuser: function (UserService) {
           return UserService.getuser();
         }
       }

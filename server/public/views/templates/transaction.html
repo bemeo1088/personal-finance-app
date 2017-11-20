@@ -1,9 +1,9 @@
 <div ng-include="'views/partials/nav.html'"></div>
 <div class="container">
     <p>
-        In transaction
+        In transaction 
     </p>
-    <div>
+    <!-- <div>
         <table class="table table-bordered table-hover table-condensed">
             <tr style="font-weight: bold">
                 <td style="width:20%">Date</td>
@@ -25,5 +25,44 @@
 
         </table>
 
+    </div> -->
+    <div ng-controller="TransactionController as tc">
+         {{4===4}}
+        <form name="frm">
+            Date: <input type="date" ng-model="tc.transaction.date" required />
+            Description: <input type="text" ng-model="tc.transaction.description" required/>
+            Category: <input type="text" ng-model="tc.transaction.category" required />
+                <!-- <div>
+                    <input-container>
+                        <select ng-model="tc.selectedCategory" selected-text="tc.getSelectedText()">
+                            <optgroup label="categories">
+                                <option ng-value="category" ng-repeat="category in tc.categories">Category {{category}}</option>
+                            </optgroup>
+                        </select>
+                    </input-container>
+                </div> -->
+            Amount: <input type="number" ng-model="tc.transaction.amount" />          
+            <button type="submit" ng-click="tc.addTransaction(tc.transaction)">Add</button>
+        </form>
+            <h2>Records for Transactions</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Description</th>
+                        <th>Category</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="transaction in tc.transactionList">
+                        <td>{{transaction.date}}</td>
+                        <td>{{transaction.description}}</td>
+                        <td>{{transaction.category}}</td>
+                        <td>{{transaction.amount}}</td>
+                    </tr>
+                </tbody>
+            </table>
     </div>
+   
 </div>
