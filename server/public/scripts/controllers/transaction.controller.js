@@ -3,14 +3,16 @@ myApp.controller('TransactionController', function (UserService, $http) {
     var vm = this;
     vm.userService = UserService;
    // vm.categories = ['Rent/Mortgage', 'Utilities', 'Groceries', 'Travel', 'Emergency'];
-    vm.selectedCategory;
-    vm.transaction = {
-            date: '',
-            description: '',
-            category: '',
-            amount: 0
-            };
-    vm.transactionList = [];
+    // vm.selectedCategory;
+    // vm.transaction = {
+    //         date: '',
+    //         description: '',
+    //         category: '',
+    //         amount: 0
+    //         };
+    // vm.transactionList = [];
+
+    
 
     // ADD transactions
     vm.addTransaction = function (transactionToAdd) {
@@ -38,9 +40,35 @@ myApp.controller('TransactionController', function (UserService, $http) {
             console.log('success');
             vm.transactionList = response.data;
         }).catch(function (error) {
-            console.log('failure', error);
-            
+            console.log('failure', error);    
         });
     }
+    
+
+    // DELETE Transactions
+    vm.deleteTransaction = function (transactionId) {
+        $http.delete('/transaction/' + transactionId).then (function (response) {
+            console.log('success');
+            vm.viewTransaction();
+        }).catch( function (error) {
+            console.log('failure');   
+        });
+    }
+
+    // EDIT Transactions
+    vm.editTransaction = function (transactionId) {
+        console.log(transactionId);
+        $http.put('/transaction/' + transactionId).then (function (response) { 
+            console.log('success');
+            vm.viewTransaction();
+        }).catch(function (error) {
+            console.log('failure');    
+        });
+    }
+
+    // vm.editClicked = function () {
+
+    // }
+
     vm.viewTransaction();
 });

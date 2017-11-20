@@ -1,8 +1,6 @@
 <div ng-include="'views/partials/nav.html'"></div>
 <div class="container">
-    <p>
-        In transaction 
-    </p>
+   
     <!-- <div>
         <table class="table table-bordered table-hover table-condensed">
             <tr style="font-weight: bold">
@@ -56,10 +54,12 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="transaction in tc.transactionList">
-                        <td>{{transaction.date}}</td>
-                        <td>{{transaction.description}}</td>
-                        <td>{{transaction.category}}</td>
-                        <td>{{transaction.amount}}</td>
+                        <td>{{transaction.date | date: "MM/dd/yyyy"}}</td>
+                        <td>{{transaction.description | uppercase}}</td>
+                        <td>{{transaction.category_name | uppercase}}</td>
+                        <td>{{transaction.amount | currency: "$"}}</td>
+                        <td><button type="submit" ng-click="tc.deleteTransaction(transaction.id)">Delete</button></td>
+                        <td><button type="submit" ng-click="tc.editTransaction(transaction.id)">Edit</button></td>
                     </tr>
                 </tbody>
             </table>
