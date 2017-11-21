@@ -2,6 +2,10 @@ myApp.controller('TransactionController', function (UserService, $http) {
     console.log('TransactionController created');
     var vm = this;
     vm.userService = UserService;
+
+    var editing = false; // decide whether we want to go to Post route (adding) or Put route (editing)
+    var editingId = 0; // hold on to the ID we want to edit
+
    // vm.categories = ['Rent/Mortgage', 'Utilities', 'Groceries', 'Travel', 'Emergency'];
     // vm.selectedCategory;
     // vm.transaction = {
@@ -12,7 +16,20 @@ myApp.controller('TransactionController', function (UserService, $http) {
     //         };
     // vm.transactionList = [];
 
-    
+    vm.sortColumn = "date";
+    vm.reverseSort = false;
+
+    vm.sortData = function (column) {
+        vm.reverseSort = (vm.sortColumn == column) ? !vm.reverseSort : false;
+        vm.sortColumn = column;
+    }
+
+    vm.getSortClass = function (column) {
+        if (vm.sortColumn == column) {
+            return vm.reverseSort ? 'arrow-down' : 'arrow-up'
+        }
+            return '';
+    }
 
     // ADD transactions
     vm.addTransaction = function (transactionToAdd) {
@@ -56,9 +73,9 @@ myApp.controller('TransactionController', function (UserService, $http) {
     }
 
     // EDIT Transactions
-    vm.editTransaction = function (transactionId) {
-        console.log(transactionId);
-        $http.put('/transaction/' + transactionId).then (function (response) { 
+    vm.editTransaction = function (transaction) {
+        console.log(transaction);
+        $http.put('/transaction/' + transaction.id, transaction).then (function (response) { 
             console.log('success');
             vm.viewTransaction();
         }).catch(function (error) {

@@ -29,7 +29,7 @@
         <form name="frm">
             Date: <input type="date" ng-model="tc.transaction.date" required />
             Description: <input type="text" ng-model="tc.transaction.description" required/>
-            Category: <input type="text" ng-model="tc.transaction.category" required />
+            Category ID: <input type="text" ng-model="tc.transaction.category_id" required />
                 <!-- <div>
                     <input-container>
                         <select ng-model="tc.selectedCategory" selected-text="tc.getSelectedText()">
@@ -46,20 +46,26 @@
             <table>
                 <thead>
                     <tr>
+                        <th>Transaction ID</th>
                         <th>Date</th>
                         <th>Description</th>
-                        <th>Category</th>
+                        <th>Category ID</th>
+                        <th>Category Name</th>
                         <th>Amount</th>
+                        <th>User ID</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr ng-repeat="transaction in tc.transactionList">
+                        <td>{{transaction.id}}</td>
                         <td>{{transaction.date | date: "MM/dd/yyyy"}}</td>
                         <td>{{transaction.description | uppercase}}</td>
+                        <td>{{transaction.category_id}}</td>
                         <td>{{transaction.category_name | uppercase}}</td>
                         <td>{{transaction.amount | currency: "$"}}</td>
+                        <td>{{transaction.user_id}}</td>
                         <td><button type="submit" ng-click="tc.deleteTransaction(transaction.id)">Delete</button></td>
-                        <td><button type="submit" ng-click="tc.editTransaction(transaction.id)">Edit</button></td>
+                        <td><button type="submit" ng-click="tc.editTransaction(transaction)">Edit</button></td>
                     </tr>
                 </tbody>
             </table>

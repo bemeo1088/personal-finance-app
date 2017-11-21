@@ -16,7 +16,7 @@ router.post('/', function (req,res) {
             res.sendStatus(500);
         } else {
             var queryText = 'INSERT INTO "transactions" ("date", "user_id", "description", "category_id", "amount") VALUES ($1, $2, $3, $4, $5);';
-            db.query(queryText, [req.body.date, req.user.id, req.body.description, req.body.category, req.body.amount], function (error, result) {
+            db.query(queryText, [req.body.date, req.user.id, req.body.description, req.body.category_id, req.body.amount], function (error, result) {
                 done();
                 if (error) {
                     console.log('Error making query', error);
@@ -53,8 +53,8 @@ router.get('/', function(req,res) {
             console.log(error);
             res.sendStatus(500);
         } else {
-            var queryText = 'SELECT "transactions"."date", "transactions"."description", "categories"."category_name", "transactions"."amount", "transactions"."user_id" FROM "transactions" INNER JOIN "categories" ON "transactions"."category_id" = "categories"."id" WHERE "transactions"."user_id" = "categories"."user_id";';
-            db.query(queryText, function (error, result){
+            var queryText = 'SELECT "transactions"."category_id", "transactions"."id", "transactions"."date", "transactions"."description", "categories"."category_name", "transactions"."amount", "transactions"."user_id" FROM "transactions" INNER JOIN "categories" ON "transactions"."category_id" = "categories"."id" WHERE "transactions"."user_id" = $1;';
+            db.query(queryText, [req.user.id], function (error, result){
                 done();
                 if (error) {
                     console.log('error making query', error);
@@ -100,8 +100,8 @@ router.put('/:id', function (req, res) {
             console.log('Error connecting', error);
             res.sendStatus(500);    
         } else {
-            var queryText = 'UPDATE "transactions" SET "date" = $1, "user_id" = $2, "description" = $3, "category_id" = $4, "amount" = $4 WHERE "id" = $6;';
-            db.query(queryText, [transaction.date, req.user.id, transaction.description, transaction.category, transaction.amount, transactionId], function (error, result) {
+            var queryText = 'UPDATE "transactions" SET "date" = $1, "user_id" = $2, "description" = $3, "category_id" = $4, "amount" = $5 WHERE "id" = $6;';
+            db.query(queryText, [transaction.date, req.user.id, transaction.description, transaction.category_id, transaction.amount, transactionId], function (error, result) {
                 done();
                 if (error) {
                     console.log('error making query', error);
