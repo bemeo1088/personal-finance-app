@@ -3,18 +3,20 @@ myApp.controller('TransactionController', function (UserService, $http) {
     var vm = this;
     vm.userService = UserService;
 
-    var editing = false; // decide whether we want to go to Post route (adding) or Put route (editing)
-    var editingId = 0; // hold on to the ID we want to edit
+    vm.editing = false; // decide whether we want to go to Post route (adding) or Put route (editing)
+    vm.editingId = 0; 
 
    // vm.categories = ['Rent/Mortgage', 'Utilities', 'Groceries', 'Travel', 'Emergency'];
-    // vm.selectedCategory;
-    // vm.transaction = {
-    //         date: '',
-    //         description: '',
-    //         category: '',
-    //         amount: 0
-    //         };
-    // vm.transactionList = [];
+    //vm.selectedCategory;
+    vm.transaction = {
+            //date: '',
+            description: '',
+            // user_id: '',
+            category_id: '',
+            amount: 0,
+            id: ''
+            };
+    vm.transactionList = [];
 
     vm.sortColumn = "date";
     vm.reverseSort = false;
@@ -26,7 +28,7 @@ myApp.controller('TransactionController', function (UserService, $http) {
 
     vm.getSortClass = function (column) {
         if (vm.sortColumn == column) {
-            return vm.reverseSort ? 'arrow-down' : 'arrow-up'
+            return vm.reverseSort ? 'arrow-down' : 'arrow-up';
         }
             return '';
     }
@@ -36,7 +38,7 @@ myApp.controller('TransactionController', function (UserService, $http) {
         console.log(transactionToAdd);
         $http.post('/transaction', transactionToAdd).then(function (response) {
             console.log('success');
-            //vm.viewTransaction();
+            vm.viewTransaction();
         }).catch(function (error) {
             console.log('failure', error);      
         });
@@ -56,6 +58,7 @@ myApp.controller('TransactionController', function (UserService, $http) {
         $http.get('/transaction').then(function (response) {
             console.log('success');
             vm.transactionList = response.data;
+            vm.editing = false;            // To set Edit mode to False
         }).catch(function (error) {
             console.log('failure', error);    
         });
@@ -83,9 +86,16 @@ myApp.controller('TransactionController', function (UserService, $http) {
         });
     }
 
-    // vm.editClicked = function () {
-
-    // }
+     vm.editClicked = function (transaction) {
+         vm.editing = true;
+         vm.transaction = {
+             date : transaction.date,
+             description : transaction.description,
+             category_id: transaction.category_id,
+             amount: transaction.amount,
+             id: transaction.id
+         };
+    }
 
     vm.viewTransaction();
 });

@@ -93,6 +93,8 @@ router.delete('/:id', function (req, res) {
 router.put('/:id', function (req, res) {
     console.log('req.body', req.body);
     console.log('req.params', req.params);
+    console.log('req.user', req.user.anonymous);
+    
     var transactionId = req.params.id;
     var transaction = req.body;
     pool.connect( function (error, db, done) {
@@ -100,8 +102,8 @@ router.put('/:id', function (req, res) {
             console.log('Error connecting', error);
             res.sendStatus(500);    
         } else {
-            var queryText = 'UPDATE "transactions" SET "date" = $1, "user_id" = $2, "description" = $3, "category_id" = $4, "amount" = $5 WHERE "id" = $6;';
-            db.query(queryText, [transaction.date, req.user.id, transaction.description, transaction.category_id, transaction.amount, transactionId], function (error, result) {
+            var queryText = 'UPDATE "transactions" SET "date" = $1, "description" = $2, "category_id" = $3, "amount" = $4 WHERE "id" = $5;';
+            db.query(queryText, [transaction.date, transaction.description, transaction.category_id, transaction.amount, transactionId], function (error, result) {
                 done();
                 if (error) {
                     console.log('error making query', error);

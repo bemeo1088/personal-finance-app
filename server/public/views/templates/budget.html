@@ -1,24 +1,11 @@
 <div ng-include="'views/partials/nav.html'"></div>
 <div class="container">
-    <div>
-        {{bc.userService}}
-        <form ng-submit="bc.addBudget()">
-            <div>
-                <h1>{{bc.}}BUDGETS</h1>
-            </div>
-            <div ng-model="bc.budget.">
-                For the month of: {{bc.month}}
-
-            </div>
-            <div>
-                <label for="income">Income</label>
-                <input type="text" ng-model="bc.user.income" />
-            </div>
-            <div>
-                <label for="income">Income</label>
-                <input type="text" ng-model="lc.user.income" />
-
-            </div>
+    <div ng-controller="BudgetController as bc">
+        {{4===4}}
+        <form>
+            Monthly Income: <input type="text" ng-model="bc.users.income" >
+            <button type="submit" ng-click="bc.addIncome(bc.income)">Add</button>
+            
 
 
 
