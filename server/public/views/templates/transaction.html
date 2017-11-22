@@ -25,7 +25,7 @@
 
     </div> -->
     <div ng-controller="TransactionController as tc">
-         {{4===4}}
+         
         <form name="frm">
             Date: <input id="date" type="text" ng-value="tc.transaction.date" ng-model="tc.transaction.date" required />
             Description: <input id="description" type="text" ng-value="tc.transaction.description" ng-model="tc.transaction.description" required/>
@@ -44,34 +44,40 @@
             <button ng-show="tc.editing" type="submit" ng-click="tc.editTransaction(tc.transaction)">Update</button>
         </form>
             <h2>Records for Transactions</h2>
+            <div class="searchBar">
+                Search: <input type="text" placeholder="Search..." ng-model="searchText" /> 
+                
+                
+            </div>
+            <br><br>
             <table>
                 <thead>
                     <tr>
-                        <th ng-click="tc.sortData('transaction.id')">Transaction ID
-                            <div ng-class="tc.getSortClass('transaction.id')"></div>
+                        <th ng-click="tc.sortData('id')">Transaction ID
+                            <div ng-class="tc.getSortClass('id')"></div>
                         </th>
-                        <th ng-click="tc.sortData('transaction.date')">Date
-                            <div ng-class="tc.getSortClass('transaction.date')"></div>
+                        <th ng-click="tc.sortData('date')">Date
+                            <div ng-class="tc.getSortClass('date')"></div>
                         </th>
-                        <th ng-click="tc.sortData('transaction.description')">Description
-                            <div ng-class="tc.getSortClass('transaction.description')"></div>
+                        <th ng-click="tc.sortData('description')">Description
+                            <div ng-class="tc.getSortClass('description')"></div>
                         </th>
-                        <th ng-click="tc.sortData('transaction.category_id')">Category ID
-                            <div ng-class="tc.getSortClass('transaction.category_id')"></div>
+                        <th ng-click="tc.sortData('category_id')">Category ID
+                            <div ng-class="tc.getSortClass('category_id')"></div>
                         </th>
-                        <th ng-click="tc.sortData('transaction.category_name')">Category Name
-                            <div ng-class="tc.getSortClass('transaction.category_name')"></div>
+                        <th ng-click="tc.sortData('category_name')">Category Name
+                            <div ng-class="tc.getSortClass('category_name')"></div>
                         </th>
-                        <th ng-click="tc.sortData('transaction.amount')">Amount
-                            <div ng-class="tc.getSortClass('transaction.amount')"></div>
+                        <th ng-click="tc.sortData('amount')">Amount
+                            <div ng-class="tc.getSortClass('amount')"></div>
                         </th>
-                        <th ng-click="tc.sortData('transaction.user_id')">User ID
-                            <div ng-class="tc.getSortClass('transaction.user_id')"></div>
+                        <th ng-click="tc.sortData('user_id')">User ID
+                            <div ng-class="tc.getSortClass('user_id')"></div>
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="transaction in tc.transactionList | orderBy:sortColumn:reverseSort">
+                    <tr ng-repeat="transaction in tc.transactionList | orderBy:tc.sortColumn:tc.reverseSort | filter:searchText">
                         <td>{{transaction.id}}</td>
                         <td>{{transaction.date}}</td>
                         <td>{{transaction.description | uppercase}}</td>

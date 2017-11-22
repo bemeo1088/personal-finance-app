@@ -6,6 +6,9 @@ myApp.controller('TransactionController', function (UserService, $http) {
     vm.editing = false; // decide whether we want to go to Post route (adding) or Put route (editing)
     vm.editingId = 0; 
 
+    // Moment.js
+   
+
    // vm.categories = ['Rent/Mortgage', 'Utilities', 'Groceries', 'Travel', 'Emergency'];
     //vm.selectedCategory;
     vm.transaction = {
@@ -16,6 +19,8 @@ myApp.controller('TransactionController', function (UserService, $http) {
             amount: 0,
             id: ''
             };
+   
+
     vm.transactionList = [];
 
     vm.sortColumn = "date";
@@ -95,6 +100,7 @@ myApp.controller('TransactionController', function (UserService, $http) {
              amount: transaction.amount,
              id: transaction.id
          };
+
     }
 
     vm.viewTransaction();
