@@ -7,7 +7,7 @@ myApp.controller('TransactionController', function (UserService, $http) {
     vm.editingId = 0; 
 
     // Moment.js
-   
+    // vm.moment(date).format('YYYY-MM-DD');
 
    // vm.categories = ['Rent/Mortgage', 'Utilities', 'Groceries', 'Travel', 'Emergency'];
     //vm.selectedCategory;
@@ -19,10 +19,11 @@ myApp.controller('TransactionController', function (UserService, $http) {
             amount: 0,
             id: ''
             };
-   
-
+            
+    
     vm.transactionList = [];
-
+ 
+    // Column sorting
     vm.sortColumn = "date";
     vm.reverseSort = false;
 

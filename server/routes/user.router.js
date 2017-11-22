@@ -9,8 +9,9 @@ router.get('/', function(req, res) {
     // send back user object from database
     console.log('logged in', req.user);
     var userInfo = {
+      id: req.user.id,
       username : req.user.username,
-      income: req.user.income
+      income: '' //req.user.income
     };
     res.send(userInfo);
   } else {
@@ -29,5 +30,29 @@ router.get('/logout', function(req, res) {
   res.sendStatus(200);
 });
 
+// POST Route to post income to users db
+router.post('/', function (req, res){
+  console.log('income in POST route', req.body);
+  pool.connect(function(error, db, done) {
+    if (error) {
+      console.log(error);
+      res.sendStatus(500);
+      
+    } else {
+      var queryText = 'INSERT INTO "users" ("income") VALUES ($1);';
+      db.query(queryText, [req.body.income], function (error, result){
+        done();
+        if (error) {
+          console.log('Error making query', error);
+          res.sendStatus(500);
+          
+        } else {
+          res.sendStatus(201);
+        }
+      })
+    }
+  })
+  
+})
 
 module.exports = router;

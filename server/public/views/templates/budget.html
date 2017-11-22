@@ -1,19 +1,45 @@
 <div ng-include="'views/partials/nav.html'"></div>
 <div class="container">
-    <div ng-controller="BudgetController as bc">
+    <div>
         {{4===4}}
-        <form>
-            Monthly Income: <input type="text" ng-model="bc.users.income" >
-            <button type="submit" ng-click="bc.addIncome(bc.income)">Add</button>
+        <div>
+            Monthly Income: <input type="text" ng-model="bc.income" >
+            <button type="submit" ng-click="bc.updateIncome(bc.income)">Add</button>
+             For the month of: <input type="text">
+        </div>
+        <br>
+        <br>
+        <div>
+            Category: <input type="text" ng-model="bc.category.category_name">
+            Amount: <input type="text" ng-model="bc.category.amount">
+            <button type="submit" ng-click="bc.addCategory(bc.category)">Create Your Own Budget</button>
+        </div>
+        <br>
+        <div class="categoryList">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Category ID</th>
+                        <th>User ID</th>
+                        <th>Category Name</th>
+                        <th>Budget Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="category in bc.categoryList">
+                        <td>{{category.id}}</td>
+                        <td>{{category.user_id}}</td>
+                        <td>{{category.category_name}}</td>
+                        <td>{{category.amount | currency:"$"}}</td>
+                        <td><button type="submit" ng-click="bc.deleteCategory(bc.category.id)">Remove</button></td>
+                    </tr>
+                </tbody>
+
+            </table>
             
-
-
-
-        </form>
+        </div>
 
 
     </div>
-    <p>
-        In Budgets
-    </p>
+   
 </div>

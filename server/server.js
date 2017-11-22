@@ -5,6 +5,18 @@ var bodyParser = require('body-parser');
 var passport = require('./strategies/sql.localstrategy');
 var sessionConfig = require('./modules/session.config');
 
+// Moment.js
+/* global require */
+// require.config({
+//     paths: {
+//         'moment': 'scripts/moment'
+//     }
+// });
+
+// require(['moment'], function (moment){
+//     alert(moment().toString());
+// });
+
 // Route includes
 var indexRouter = require('./routes/index.router');
 var userRouter = require('./routes/user.router');

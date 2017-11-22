@@ -8,8 +8,11 @@ myApp.service('UserService', function($http, $location){
     $http.get('/user').then(function(response) {
         if(response.data.username) {
             // user has a curret session on the server
+            self.userObject.id = response.data.id;
             self.userObject.userName = response.data.username;
             self.userObject.income = response.data.income;
+            
+            console.log(response.data);
             console.log('UserService -- getuser -- User Data: ', self.userObject.userName);
         } else {
             console.log('UserService -- getuser -- failure');

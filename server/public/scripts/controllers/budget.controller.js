@@ -2,17 +2,25 @@ myApp.controller('BudgetController', function (UserService, $http) {
     console.log('BudgetController created');
     var vm = this;
     vm.userService = UserService;
+    
+    vm.category = {
+        category_name: '',
+        amount: ''
+    };
 
-    // ADD after-tax income for the month
-    // vm.addIncome = function (incomeToAdd) {
-    //     console.log('incomeToAdd', incomeToAdd);
-    //     $http.post('/budget', incomeToAdd).then( function (response){
-    //         console.log('success');
-    //         //vm.viewBudgets();
-    //     }).catch( function (error) {
-    //         console.log('failure', error);    
-    //     });    
-    // }
+    vm.categoryList = [];
+
+    // UPDATE after-tax income for the month
+    vm.updateIncome = function (userIncome) {
+        console.log('userIncome', userIncome);
+        var id = UserService.userObject.id;   // Set id equals to id property within userObject in UserService
+        $http.put('/budget/' + id, {income: userIncome}).then( function (response){
+            console.log('success', response);
+            //vm.viewBudgets();
+        }).catch( function (error) {
+            console.log('failure', error);    
+        });    
+    }
 
 
     // ADD categories
@@ -26,10 +34,13 @@ myApp.controller('BudgetController', function (UserService, $http) {
         });
     }
 
+
     // VIEW categories
     vm.viewCategory = function () {
         $http.get('/budget').then(function (response){
-            console.log('success');    
+            console.log('success', response);  
+            vm.categoryList = response.data;  
+            console.log('categoryList', categoryList);    
         }).catch(function (error){
             console.log('failure', error);   
         });
@@ -37,7 +48,7 @@ myApp.controller('BudgetController', function (UserService, $http) {
 
     // DELETE categories
     vm.deleteCategory = function (categoryId) {
-        $http.delete('/budget' + categoryId).then(function(response){
+        $http.delete('/budget/' + categoryId).then(function(response){
             console.log('success');
             vm.viewCategory();
         }).catch(function(error){
@@ -45,5 +56,5 @@ myApp.controller('BudgetController', function (UserService, $http) {
         });
     }
     
-    //viewCategory();
+    vm.viewCategory();
 });

@@ -25,7 +25,6 @@
 
     </div> -->
     <div ng-controller="TransactionController as tc">
-         
         <form name="frm">
             Date: <input id="date" type="text" ng-value="tc.transaction.date" ng-model="tc.transaction.date" required />
             Description: <input id="description" type="text" ng-value="tc.transaction.description" ng-model="tc.transaction.description" required/>
@@ -45,9 +44,7 @@
         </form>
             <h2>Records for Transactions</h2>
             <div class="searchBar">
-                Search: <input type="text" placeholder="Search..." ng-model="searchText" /> 
-                
-                
+                Search: <input type="text" placeholder="Search..." ng-model="searchText" />    
             </div>
             <br><br>
             <table>

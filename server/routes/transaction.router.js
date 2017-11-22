@@ -29,21 +29,6 @@ router.post('/', function (req,res) {
     }); // End Pool
 }); // End POST Route
 
-// var transactionList = [];
-
-// POST route
-// router.post('/', function (req, res){
-//     console.log(req.body);
-//     var recordTransaction = req.body;
-//     transactionList.push(recordTransaction);
-//     console.log('transactionList', transactionList);
-//     res.sendStatus(201); 
-// })
-
-// GET route
-// router.get('/', function(req, res) {
-//     res.sendStatus(200);
-// });
 
 // Handles Ajax request for getting transactions--GET Route
 router.get('/', function(req,res) {
