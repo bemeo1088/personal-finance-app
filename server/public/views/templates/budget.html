@@ -1,49 +1,41 @@
 <div ng-include="'views/partials/nav.html'"></div>
 <div class="container">
     <div>
+        <h1 class="md-title">Add Your Own Budgets</h1>
+        <div layout="row">
+            <md-input-container>
+                <label>Monthly Income</label>
+                <input ng-model="bc.income" type="text">   
+            </md-input-container> 
+            <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+                <md-button class="md-raised md-primary" type="submit" ng-click="bc.updateIncome(bc.income)">Update Income</md-button>
+            </section>
+        </div>
         
-        <div>
-            Monthly Income: $<input type="text" ng-model="bc.income" >
-            <button type="submit" ng-click="bc.updateIncome(bc.income)">Add</button>
-             <!-- For the month of:  -->
-                <!-- <form name="myForm" ng-controller="BudgetController as bc">
-                    <label for="exampleInput">Pick a month in 2013:</label>
-                    <input id="exampleInput" type="month" name="input" ng-model="example.value" placeholder="yyyy-MM" min="2017-01" max="2017-12"
-                     />
-                    <div role="alert">
-                        <span class="error" ng-show="myForm.input.$error.required">
-                            Required!</span>
-                        <span class="error" ng-show="myForm.input.$error.month">
-                            Not a valid month!</span>
-                    </div>
-                   <tt>value = {{bc.example.value | date: "yyyy-MM"}}</tt>
-                    <br/>
-                    <tt>myForm.input.$valid = {{bc.myForm.input.$valid}}</tt>
-                    <br/>
-                    <tt>myForm.input.$error = {{bc.myForm.input.$error}}</tt>
-                    <br/>
-                    <tt>myForm.$valid = {{bc.myForm.$valid}}</tt>
-                    <br/>
-                    <tt>myForm.$error.required = {{!!myForm.$error.required}}</tt>
-                    <br/> 
-                </form> -->
-        </div>
-        <br>
-        <br>
-        <div>
-            Category:   <select ng-model="bc.category.category_name">
-                            <option value = "Gas"> Gas</option>
-                            <option value = "Rent"> Rent</option>
-                            <option value = "Groceries"> Groceries</option>
-                            <option value = "Utilities"> Utilities</option>
-                            <option value = "Restaurants"> Restaurants</option>
-                            <option value = "Miscellaneous"> Miscellaneous</option>
-                        </select>                
+        <div layout="row">
+            <md-input-container class="md-block">
+                <label>Category</label>
+                <md-select name="type" ng-model="bc.category.category_name">
+                    <md-option value="Gas">Gas</md-option>
+                    <md-option value="Rent">Rent</md-option>
+                    <md-option value="Groceries">Groceries</md-option>
+                    <md-option value="Utilities">Utilities</md-option>
+                    <md-option value="Restaurants">Restaurants</md-option>
+                    <md-option value="Miscellaneous">Miscellaneous</md-option>
+                </md-select>
+            </md-input-container>
 
-            Amount: <input type="text" ng-model="bc.category.amount">
-            <button type="submit" ng-click="bc.addCategory(bc.category)">Create Your Own Budget</button>
+            <md-input-container class="md-block">
+                    <label>Amount</label>
+                    <input ng-model="bc.category.amount" type="text">
+            </md-input-container>
+                
+            
+            <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+                <md-button class="md-raised md-primary" type="submit" ng-click="bc.addCategory(bc.category)">Add Budget</md-button>
+            </section>
         </div>
-        <br>
+
         <div class="categoryList">
             <table>
                 <thead>
@@ -69,8 +61,8 @@
         <br>
 
         <div>
-            Monthly Income: {{bc.userInfo.income | currency: "$"}} <br><br>
-            Remaining Balance: $<input type="text" ng-model='bc.remainingBalance'>
+            <h4>Monthly Income:</h4> {{bc.userInfo.income | currency: "$"}} <br><br>
+            <h4>Remaining Balance:</h4> {{bc.remainingBalance | currency: "$"}}
         </div>
     </div>
    

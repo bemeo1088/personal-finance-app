@@ -27,7 +27,7 @@
     <div ng-controller="TransactionController as tc">
  
         <form name="frm">
-            Date: <input id="date" type="text" ng-value="tc.transaction.date" ng-model="tc.transaction.date" required />
+            Date: <input id="date" type="date" ng-model="tc.transaction.date" required />
             Description: <input id="description" type="text" ng-value ="tc.transaction.description" ng-model="tc.transaction.description" required/>
             Category:   <select ng-model = "category_name" ng-value ="tc.transaction.category_name" ng-options = "category_name as category_name.category_name for category_name in tc.categoryList">
                         </select>
@@ -70,7 +70,7 @@
                 <tbody>
                     <tr ng-repeat="transaction in tc.transactionList | orderBy:tc.sortColumn:tc.reverseSort | filter:searchText">
                         <td>{{transaction.id}}</td>
-                        <td>{{transaction.date}}</td>
+                        <td>{{transaction.date | date: "MM/dd/yyyy"}}</td>
                         <td>{{transaction.description | uppercase}}</td>
                         <td>{{transaction.category_id}}</td>
                         <td>{{transaction.category_name | uppercase}}</td>

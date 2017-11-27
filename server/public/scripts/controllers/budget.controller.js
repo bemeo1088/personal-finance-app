@@ -60,24 +60,29 @@ myApp.controller('BudgetController', function (UserService, $http) {
             console.log('success', response);  
             vm.categoryList = response.data;  
             console.log('categoryList', vm.categoryList);    
+            getUser();
         }).catch(function (error){
             console.log('failureeeeee', error);   
         });
+    }
 
+    function getUser() {
         $http.get('/user').then(function (response) {
             console.log('success User', response);
             vm.userInfo = response.data;
             //console.log('categoryList', categoryList);    
+            recalculateSum();
         }).catch(function (error) {
             console.log('failureeeeee', error);
         });
+    }
 
+    function recalculateSum() {
         sum = 0;
         console.log('categoryList.length', vm.categoryList.length);
-        
         for (var i = 0; i < vm.categoryList.length; i++) {
             sum += parseInt(vm.categoryList[i].amount);
-            console.log('vm.categoryList[i].amount', vm.categoryList[i].amount);    
+            console.log('vm.categoryList[i].amount', vm.categoryList[i].amount);
         }
         vm.remainingBalance = parseInt(vm.userInfo.income) - sum;
         console.log('remainingBalance', vm.remainingBalance);

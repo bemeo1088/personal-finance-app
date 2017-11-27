@@ -102,7 +102,7 @@ myApp.controller('TransactionController', function (UserService, $http) {
      vm.editClicked = function (transaction) {
          vm.editing = true;
          vm.transaction = {
-             date : transaction.date,
+             date : new Date(transaction.date),
              description : transaction.description,
              category_id: transaction.category_id,
              amount: transaction.amount,

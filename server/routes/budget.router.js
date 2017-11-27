@@ -34,24 +34,28 @@ router.put('/:id', function (req,res){
 
 // POST category
 router.post('/', function (req,res){
-    console.log('category POST route req.body', req.body);
-    pool.connect(function(error, db, done){
-        if (error) {
-            console.log(error);
-            res.sendStatus(500);    
-        } else {
-            var queryText = 'INSERT INTO "categories" ("user_id", "category_name", "amount") VALUES ($1, $2, $3);';
-            db.query(queryText, [req.user.id, req.body.category_name, req.body.amount], function (error, result){
-                done();
-                if (error) {
-                    console.log('Error making query', error);
-                    res.sendStatus(500);    
-                } else {
-                    res.sendStatus(201);
-                }
-            }); // End query
-        }
-    }); // End Pool
+    if(req.isAuthenticated()){
+        console.log('category POST route req.body', req.body);
+        pool.connect(function(error, db, done){
+            if (error) {
+                console.log(error);
+                res.sendStatus(500);    
+            } else {
+                var queryText = 'INSERT INTO "categories" ("user_id", "category_name", "amount") VALUES ($1, $2, $3);';
+                db.query(queryText, [req.user.id, req.body.category_name, req.body.amount], function (error, result){
+                    done();
+                    if (error) {
+                        console.log('Error making query', error);
+                        res.sendStatus(500);    
+                    } else {
+                        res.sendStatus(201);
+                    }
+                }); // End query
+            }
+        }); // End Pool
+    } else {
+        res.sendStatus(401);
+    }
 }); // End POST Category Route
 
 // GET category
