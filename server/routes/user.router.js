@@ -11,7 +11,7 @@ router.get('/', function(req, res) {
     var userInfo = {
       id: req.user.id,
       username : req.user.username,
-      income: '' //req.user.income
+      income: req.user.income
     };
     res.send(userInfo);
   } else {

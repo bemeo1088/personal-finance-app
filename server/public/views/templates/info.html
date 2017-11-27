@@ -1,6 +1,11 @@
 <div ng-include="'views/partials/nav.html'"></div>
 <div class="container">
-
+    <p>
+      <button ng-click="ic.requestChart()">Show Chart</button>
+    </p>
+    <div style="width: 70%;">
+      <canvas id="myChart" height="750" width="700"></canvas>
+    </div>
 
   </div>
 </div>

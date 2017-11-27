@@ -66,10 +66,11 @@
 
             </table>    
         </div>
+        <br>
 
-        <p><button ng-click="bc.requestChart()">Show Chart</button></p>
-        <div style="width: 70%;">
-            <canvas id="myChart" height="750" width="700"></canvas>
+        <div>
+            Monthly Income: {{bc.userInfo.income}} <br><br>
+            Remaining Balance: <input type="text" ng-model="bc.remainingBalance">
         </div>
     </div>
    
