@@ -1,69 +1,80 @@
 <div ng-include="'views/partials/nav.html'"></div>
 <div class="container">
     <div>
-        <h1 class="md-title">Add Your Own Budgets</h1>
-        <div layout="row">
-            <md-input-container>
-                <label>Monthly Income</label>
-                <input ng-model="bc.income" type="text">   
-            </md-input-container> 
-            <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
-                <md-button class="md-raised md-primary" type="submit" ng-click="bc.updateIncome(bc.income)">Update Income</md-button>
-            </section>
-        </div>
-        
-        <div layout="row">
-            <md-input-container class="md-block">
-                <label>Category</label>
-                <md-select name="type" ng-model="bc.category.category_name">
-                    <md-option value="Gas">Gas</md-option>
-                    <md-option value="Rent">Rent</md-option>
-                    <md-option value="Groceries">Groceries</md-option>
-                    <md-option value="Utilities">Utilities</md-option>
-                    <md-option value="Restaurants">Restaurants</md-option>
-                    <md-option value="Miscellaneous">Miscellaneous</md-option>
-                </md-select>
-            </md-input-container>
-
-            <md-input-container class="md-block">
-                    <label>Amount</label>
-                    <input ng-model="bc.category.amount" type="text">
-            </md-input-container>
+        <h1 class="md-title">ADD YOUR OWN BUDGETS</h1>
+            <div flex layout="row" layout-align="center center">
                 
-            
-            <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
-                <md-button class="md-raised md-primary" type="submit" ng-click="bc.addCategory(bc.category)">Add Budget</md-button>
-            </section>
-        </div>
+                <div layout="row">
+                    <md-input-container>
+                        <label>Monthly Income</label>
+                        <input ng-model="bc.income" type="text">   
+                    </md-input-container> 
+                    <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+                        <md-button class="md-raised md-primary" type="submit" ng-click="bc.updateIncome(bc.income)">Update Income</md-button>
+                    </section>
+                </div>
+                
+                <div layout="row">
+                    <md-input-container class="md-block">
+                        <label>Category</label>
+                        <md-select name="type" ng-model="bc.category.category_name">
+                            <md-option value="Gas">Gas</md-option>
+                            <md-option value="Rent">Rent</md-option>
+                            <md-option value="Groceries">Groceries</md-option>
+                            <md-option value="Utilities">Utilities</md-option>
+                            <md-option value="Restaurants">Restaurants</md-option>
+                            <md-option value="Miscellaneous">Miscellaneous</md-option>
+                        </md-select>
+                    </md-input-container>
 
-        <div class="categoryList">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Category ID</th>
-                        <th>User ID</th>
-                        <th>Category Name</th>
-                        <th>Budget Amount</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="category in bc.categoryList">
-                        <td>{{category.id}}</td>
-                        <td>{{category.user_id}}</td>
-                        <td>{{category.category_name}}</td>
-                        <td>{{category.amount | currency:"$"}}</td>
-                        <td><button type="submit" ng-click="bc.deleteCategory(category.id)">Remove</button></td>
-                    </tr>
-                </tbody>
+                    <md-input-container class="md-block">
+                            <label>Amount</label>
+                            <input ng-model="bc.category.amount" type="text">
+                    </md-input-container>
+                        
+                    
+                    <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+                        <md-button class="md-raised md-primary" type="submit" ng-click="bc.addCategory(bc.category)">Add Budget</md-button>
+                    </section>
+                </div>
+            </div>
 
-            </table>    
-        </div>
+            <div class="categoryList">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Category ID</th>
+                            <th>User ID</th>
+                            <th>Category Name</th>
+                            <th>Budget Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="category in bc.categoryList">
+                            <td>{{category.id}}</td>
+                            <td>{{category.user_id}}</td>
+                            <td>{{category.category_name}}</td>
+                            <td>{{category.amount | currency:"$"}}</td>
+                            <td><button type="submit" ng-click="bc.deleteCategory(category.id)">Remove</button></td>
+                        </tr>
+                    </tbody>
+
+                </table>    
+            </div>
         <br>
 
-        <div>
-            <h4>Monthly Income:</h4> {{bc.userInfo.income | currency: "$"}} <br><br>
-            <h4>Remaining Balance:</h4> {{bc.remainingBalance | currency: "$"}}
-        </div>
+            <div>
+                <md-input-container layout="column" layout-align="center center">
+                    <label>Monthly Income: </label>{{bc.userInfo.income | currency: "$"}}
+                    
+                </md-input-container>
+                <md-input-container layout="column" layout-align="center center">
+                    <label>Remaining Balance: </label>{{bc.remainingBalance | currency: "$"}}
+                
+                </md-input-container>
+
+                
+            </div>
     </div>
    
 </div>
