@@ -1,11 +1,11 @@
 <div ng-include="'views/partials/nav.html'"></div>
 <div class="container">
     <div>
-        {{4===4}}
+        
         <div>
-            Monthly Income: <input type="text" ng-model="bc.income" >
+            Monthly Income: $<input type="text" ng-model="bc.income" >
             <button type="submit" ng-click="bc.updateIncome(bc.income)">Add</button>
-             For the month of: 
+             <!-- For the month of:  -->
                 <!-- <form name="myForm" ng-controller="BudgetController as bc">
                     <label for="exampleInput">Pick a month in 2013:</label>
                     <input id="exampleInput" type="month" name="input" ng-model="example.value" placeholder="yyyy-MM" min="2017-01" max="2017-12"
@@ -69,8 +69,8 @@
         <br>
 
         <div>
-            Monthly Income: {{bc.userInfo.income}} <br><br>
-            Remaining Balance: <input type="text" ng-model="bc.remainingBalance">
+            Monthly Income: {{bc.userInfo.income | currency: "$"}} <br><br>
+            Remaining Balance: $<input type="text" ng-model='bc.remainingBalance'>
         </div>
     </div>
    

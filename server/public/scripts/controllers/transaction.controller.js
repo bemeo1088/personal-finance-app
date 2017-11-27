@@ -66,7 +66,7 @@ myApp.controller('TransactionController', function (UserService, $http) {
     // VIEW Categories
     vm.viewCategory = function () {
         $http.get('/budget').then(function (response) {
-            //console.log('success ddddd', response);
+            //console.log('success', response);
             vm.categoryList = response.data;
             //console.log('categoryList', vm.categoryList);    
         }).catch(function (error) {

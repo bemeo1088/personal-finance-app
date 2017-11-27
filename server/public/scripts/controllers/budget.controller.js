@@ -43,6 +43,7 @@ myApp.controller('BudgetController', function (UserService, $http) {
     vm.addCategory = function (categoryToAdd) {
         console.log('categoryToAdd', categoryToAdd);
         $http.post('/budget', categoryToAdd).then(function(response){
+            vm.categoryList.push(categoryToAdd); // <--push new budget to categoryList to calculate remaining balance
             console.log('success');
             vm.viewCategory();
         }).catch(function(error){
@@ -56,12 +57,13 @@ myApp.controller('BudgetController', function (UserService, $http) {
     vm.viewCategory = function () {
 
         $http.get('/budget').then(function (response){
-            //console.log('success', response);  
+            console.log('success', response);  
             vm.categoryList = response.data;  
-            //console.log('categoryList', categoryList);    
+            console.log('categoryList', vm.categoryList);    
         }).catch(function (error){
             console.log('failureeeeee', error);   
         });
+
         $http.get('/user').then(function (response) {
             console.log('success User', response);
             vm.userInfo = response.data;
@@ -69,18 +71,16 @@ myApp.controller('BudgetController', function (UserService, $http) {
         }).catch(function (error) {
             console.log('failureeeeee', error);
         });
+
         sum = 0;
-        console.log('aaaa', vm.categoryList.length);
+        console.log('categoryList.length', vm.categoryList.length);
         
         for (var i = 0; i < vm.categoryList.length; i++) {
             sum += parseInt(vm.categoryList[i].amount);
-            console.log('cccc', vm.categoryList[i].amount);
-            
+            console.log('vm.categoryList[i].amount', vm.categoryList[i].amount);    
         }
         vm.remainingBalance = parseInt(vm.userInfo.income) - sum;
         console.log('remainingBalance', vm.remainingBalance);
-        
-
     }
 
     // DELETE categories

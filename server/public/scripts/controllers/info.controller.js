@@ -5,10 +5,10 @@ myApp.controller('InfoController', function(UserService, $http) {
 
   // Chart
   vm.chartData = [];
-  // CHART
+
   vm.myChart = document.getElementById('myChart').getContext('2d');
 
-  // Global Options
+  // Chart: Global Options
   Chart.defaults.global.defaultFontFamily = 'Lato';
   Chart.defaults.global.defaultFontSize = 9;
   Chart.defaults.global.defaultFontColor = '#777';
@@ -17,29 +17,29 @@ myApp.controller('InfoController', function(UserService, $http) {
   vm.requestChart = function () {
     budgetLabel = [];
     budgetAmount = [];
-    transactionList = [];
+    transactionList = [];  // Transaction Names
     transactionAmount = [];
     $http.get('/budget').then(function (response) {
-      //vm.budgetLabel =[];
       vm.chartData = response.data;
-      for (var i = 0; i < vm.chartData.length; i++) {
-        budgetAmount.push(vm.chartData[i].amount);
-        budgetLabel.push(vm.chartData[i].category_name);
-        //console.log ("aaa", budgetLabel);
+      console.log('chartData', vm.chartData);
+        for (var i = 0; i < vm.chartData.length; i++) {
+          budgetAmount.push(vm.chartData[i].amount);
+          budgetLabel.push(vm.chartData[i].category_name);
+          //console.log ("budgetLabel", budgetLabel);
       }
       $http.get('/transaction').then(function (response) {
         console.log('success importing transactions');
         transactionList = response.data;
-        console.log("Long Nguyen", transactionList);
-        for (i = 0; i < budgetLabel.length; i++) {
-          sum = 0;
-          for (var j = 0; j < transactionList.length; j++) {
-            if (budgetLabel[i] == transactionList[j].category_name) {
-              sum += parseInt(transactionList[j].amount);
+        console.log("transactionList", transactionList);
+          for (i = 0; i < budgetLabel.length; i++) {
+            sum = 0;
+            for (var j = 0; j < transactionList.length; j++) {
+              if (budgetLabel[i] == transactionList[j].category_name) {
+                sum += parseInt(transactionList[j].amount);
+              }
             }
+            transactionAmount.push(sum);
           }
-          transactionAmount.push(sum);
-        }
         vm.budgetChart = new Chart(myChart, {
           type: 'line', // bar,pie, line, horizontalBar
           data: {
@@ -89,7 +89,7 @@ myApp.controller('InfoController', function(UserService, $http) {
           options: {
             title: {
               display: true,
-              text: 'Budgets of the month',
+              text: 'Budgets vs. Transactions of the month',
               fontSize: 25
             },
             legend: {
