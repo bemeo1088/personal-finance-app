@@ -57,7 +57,7 @@ router.post('/', function (req,res){
 // GET category
 router.get('/', function (req, res) {
     pool.connect(function (error, db, done) {
-        console.log('get /transaction route');
+        console.log('get /budget route');
         if (error) {
             console.log(error);
             res.sendStatus(500);
@@ -97,5 +97,27 @@ router.delete('/:id', function (req, res) {
         }
     }); // End pool
 }); // End DELETE route
+
+// GET chart Route
+// router.get('/', function (req, res) {
+//     pool.connect(function (error, db, done) {
+//         console.log('get /budget chart route');
+//         if (error) {
+//             console.log(error);
+//             res.sendStatus(500);
+//         } else {
+//             var queryText = 'SELECT category_id, SUM (amount) AS "totalAmount" FROM transactions WHERE user_id = $1 GROUP BY category_id;';
+//             db.query(queryText, [req.user.id], function (error, result) {
+//                 done();
+//                 if (error) {
+//                     console.log('error making query', error);
+//                     res.sendStatus(500);
+//                 } else {
+//                     res.send(result.rows);
+//                 }
+//             }); // End query
+//         }
+//     }); // End pool
+// }); // End GET Route
 
 module.exports = router;

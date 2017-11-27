@@ -25,21 +25,15 @@
 
     </div> -->
     <div ng-controller="TransactionController as tc">
+ 
         <form name="frm">
             Date: <input id="date" type="text" ng-value="tc.transaction.date" ng-model="tc.transaction.date" required />
-            Description: <input id="description" type="text" ng-value="tc.transaction.description" ng-model="tc.transaction.description" required/>
-            Category ID: <input id="categoryId" type="text" ng-value="tc.transaction.category_id" ng-model="tc.transaction.category_id" required />
-                <!-- <div>
-                    <input-container>
-                        <select ng-model="tc.selectedCategory" selected-text="tc.getSelectedText()">
-                            <optgroup label="categories">
-                                <option ng-value="category" ng-repeat="category in tc.categories">Category {{category}}</option>
-                            </optgroup>
+            Description: <input id="description" type="text" ng-value ="tc.transaction.description" ng-model="tc.transaction.description" required/>
+            Category:   <select ng-model = "category_name" ng-value ="tc.transaction.category_name" ng-options = "category_name as category_name.category_name for category_name in tc.categoryList" required>
                         </select>
-                    </input-container>
-                </div> -->
+            Category ID: <input id="categoryId" type="text" ng-value="tc.transaction.category_id" ng-model="category_name.id" />
             Amount: <input type="text" ng-value="tc.transaction.amount" ng-model="tc.transaction.amount" />          
-            <button ng-hide="tc.editing" type="submit" ng-click="tc.addTransaction(tc.transaction)">Add</button>
+            <button ng-hide="tc.editing" type="submit" ng-click="tc.addTransaction(tc.transaction, category_name.category_name, category_name.id)">Add</button>
             <button ng-show="tc.editing" type="submit" ng-click="tc.editTransaction(tc.transaction)">Update</button>
         </form>
             <h2>Records for Transactions</h2>

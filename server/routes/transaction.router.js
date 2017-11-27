@@ -15,8 +15,8 @@ router.post('/', function (req,res) {
             console.log(error);
             res.sendStatus(500);
         } else {
-            var queryText = 'INSERT INTO "transactions" ("date", "user_id", "description", "category_id", "amount") VALUES ($1, $2, $3, $4, $5);';
-            db.query(queryText, [req.body.date, req.user.id, req.body.description, req.body.category_id, req.body.amount], function (error, result) {
+            var queryText = 'INSERT INTO "transactions" ("date", "user_id", "description", "category_name", "amount", "category_id") VALUES ($1, $2, $3, $4, $5, $6);';
+            db.query(queryText, [req.body.date, req.user.id, req.body.description, req.body.category_name, req.body.amount, req.body.category_id], function (error, result) {
                 done();
                 if (error) {
                     console.log('Error making query', error);
@@ -28,7 +28,27 @@ router.post('/', function (req,res) {
         }
     }); // End Pool
 }); // End POST Route
-
+// //GET category
+// router.getCategories('/', function (req, res) {
+//     pool.connect(function (error, db, done) {
+//         console.log('get /budget route');
+//         if (error) {
+//             console.log(error);
+//             res.sendStatus(500);
+//         } else {
+//             var queryText = 'SELECT "categories"."id",  "categories"."category_name" FROM "categories" INNER JOIN "users" ON "categories"."user_id" = "users"."id" WHERE "categories"."user_id" = $1;';
+//             db.query(queryText, [req.user.id], function (error, result) {
+//                 done();
+//                 if (error) {
+//                     console.log('error making query', error);
+//                     res.sendStatus(500);
+//                 } else {
+//                     res.send(result.rows);
+//                 }
+//             }); // End query
+//         }
+//     }); // End pool
+// }); // End GET Route
 
 // Handles Ajax request for getting transactions--GET Route
 router.get('/', function(req,res) {

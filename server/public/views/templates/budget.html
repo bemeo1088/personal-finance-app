@@ -31,7 +31,15 @@
         <br>
         <br>
         <div>
-            Category: <input type="text" ng-model="bc.category.category_name">
+            Category:   <select ng-model="bc.category.category_name">
+                            <option value = "Gas"> Gas</option>
+                            <option value = "Rent"> Rent</option>
+                            <option value = "Groceries"> Groceries</option>
+                            <option value = "Utilities"> Utilities</option>
+                            <option value = "Restaurants"> Restaurants</option>
+                            <option value = "Miscellaneous"> Miscellaneous</option>
+                        </select>                
+
             Amount: <input type="text" ng-model="bc.category.amount">
             <button type="submit" ng-click="bc.addCategory(bc.category)">Create Your Own Budget</button>
         </div>
@@ -58,8 +66,11 @@
 
             </table>    
         </div>
-    <canvas id="myChart"></canvas>
 
+        <p><button ng-click="bc.requestChart()">Show Chart</button></p>
+        <div style="width: 70%;">
+            <canvas id="myChart" height="750" width="700"></canvas>
+        </div>
     </div>
    
 </div>
