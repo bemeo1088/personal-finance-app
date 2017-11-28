@@ -39,7 +39,7 @@
                 </div>
             </div>
 
-            <div class="categoryList">
+            <!-- <div class="categoryList">
                 <table>
                     <thead>
                         <tr>
@@ -60,20 +60,58 @@
                     </tbody>
 
                 </table>    
-            </div>
+            </div> -->
         <br>
 
-            <div>
-                <md-input-container layout="column" layout-align="center center">
-                    <label>Monthly Income: </label>{{bc.userInfo.income | currency: "$"}}
-                    
-                </md-input-container>
-                <md-input-container layout="column" layout-align="center center">
-                    <label>Remaining Balance: </label>{{bc.remainingBalance | currency: "$"}}
-                
-                </md-input-container>
+        <!-- <md-toolbar class="md-table-toolbar md-default">
+            <div class="md-toolbar-tools">
+                <span>Budgets List</span>
+            </div>
+        </md-toolbar> -->
+        <h1 class="md-title">BUDGETS LIST</h1><br>
+        <md-table-container>
+            <table md-table>
+                <thead>
+                    <tr md-row>
+                        <th>Category ID</th>
+                        <th>User ID</th>
+                        <th>Category Name</th>
+                        <th>Budget Amount</th>
+                    </tr>
+                </thead>
+                <tbody md-body>
+                    <tr md-row ng-repeat="category in bc.categoryList">
+                        <td md-cell>{{category.id}}</td>
+                        <td md-cell>{{category.user_id}}</td>
+                        <td md-cell>{{category.category_name}}</td>
+                        <td md-cell>{{category.amount | currency:"$"}}</td>
+                        <td><md-button class="sm-raised sm-secondary" type="submit" ng-click="bc.deleteCategory(category.id)">Remove</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </md-table-container>
+        <br>
 
+        <!-- MONTHLY INCOME AND REMAINING BALANCE -->
+            <div layout="row" layout-align="center center">
                 
+                    <label id="label">Monthly Income :</label>
+                    <section layout="row">{{bc.userInfo.income | currency: "$"}}</section>                          
+            </div>
+            <div layout="row" layout-align="center center">
+                
+                    <label id="label">Remaining Balance :</label>
+                    <section layout="row">{{bc.remainingBalance | currency: "$"}}</section>        
+            </div>
+            <br>
+
+            <div>
+                <!-- SHOW CHART -->
+                <md-button class="md-raised md-primary" type="submit" ng-click="bc.requestBudgetChart()">Show Chart</md-button>
+            
+                <div style="width: 70%;">
+                    <canvas id="myBudgetChart" height="300" width="300"></canvas>
+                </div>
             </div>
     </div>
    

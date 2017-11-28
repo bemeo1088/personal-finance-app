@@ -1,6 +1,6 @@
 <div ng-include="'views/partials/nav.html'"></div>
 <div class="container">
-    <div ng-controller="TransactionController as tc"> {{4===4}}
+    <div ng-controller="TransactionController as tc">
         <h1 class="md-title">ADD YOUR TRANSACTIONS</h1>
 
         <div flex layout="row" layout-align="center center">
@@ -12,15 +12,7 @@
 
                 <md-input-container>
                     <label>Description</label>
-                    <input id="description" type="text" ng-value ="tc.transaction.description" ng-model="tc.transaction.description">
-                </md-input-container>
-
-                <md-input-container>
-                    <label>Category</label>
-                    <md-select ng-model = "category_name" ng-value ="tc.transaction.category_name" ng-options = "category_name as category_name.category_name
-                    for category_name in tc.categoryList">
-
-                    </md-select>
+                    <input id="description" type="text" ng-value ="tc.transaction.description" ng-model="tc.transaction.description" required>
                 </md-input-container>
             </div>
         </div>
@@ -29,9 +21,9 @@
 
         <form name="frm">
             <!-- Date: <input id="date" type="date" ng-model="tc.transaction.date" required /> -->
-            <!-- Description: <input id="description" type="text" ng-value ="tc.transaction.description" ng-model="tc.transaction.description" required/> -->
-            <!-- Category:   <select ng-model = "category_name" ng-value ="tc.transaction.category_name" ng-options = "category_name as category_name.category_name for category_name in tc.categoryList">
-                        </select> -->
+            Description: <input id="description" type="text" ng-value ="tc.transaction.description" ng-model="tc.transaction.description" required/>
+            Category:   <select ng-model = "category_name" ng-value ="tc.transaction.category_name" ng-options = "category_name as category_name.category_name for category_name in tc.categoryList">
+                        </select>
             Category ID: <input id="categoryId" type="text" ng-value="tc.transaction.category_id" ng-model="category_name.id" />
             Amount: <input type="text" ng-value="tc.transaction.amount" ng-model="tc.transaction.amount" />          
             <button ng-hide="tc.editing" type="submit" ng-click="tc.addTransaction(tc.transaction, category_name.category_name, category_name.id)">Add</button>

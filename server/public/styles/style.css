@@ -4,6 +4,7 @@ body, html {
   padding: 0;
   font-family: sans-serif;
   font-size: 14px;
+  text-align: center;
 }
 
 form {
@@ -57,6 +58,8 @@ form {
   background-color: #333333;
   width: 100%;
   border-radius: 0px;
+  
+  
 }
 
 ul {
@@ -64,7 +67,10 @@ ul {
   margin: 0;
   padding: 0;
   overflow: hidden;
+  display: inline-block;
 }
+
+
 
 li {
   float: left;
@@ -84,20 +90,25 @@ li a:hover {
   color: #eee;
 }
 
-table {
+/* table {
   margin-left: 10px;
   border-collapse: collapse;
 }
 td {
   border:1px solid black;
   padding: 5px;
+  text-align: center;
 }
 
 th {
   border: 1px solid black;
   padding: 5px;
-  text-align: left;
+  text-align: center;
   cursor: pointer;
+} */
+
+th,td {
+  text-align: center !important;
 }
 
 .arrow-up {
@@ -116,4 +127,8 @@ th {
   border-right: 5px solid transparent;
   border-top: 10px solid black;
   display: inline-block;
+}
+
+#label {
+  color: grey;
 }
