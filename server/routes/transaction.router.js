@@ -8,26 +8,31 @@ var pool = require('../modules/pool.js');
 
 // Handles Ajax request for posting transactions-- POST Route
 router.post('/', function (req,res) {
-    // req.user.id is the user row
-    console.log('transaction POST route', req.body);
-    pool.connect(function(error, db, done) {
-        if (error) {
-            console.log(error);
-            res.sendStatus(500);
-        } else {
-            var queryText = 'INSERT INTO "transactions" ("date", "user_id", "description", "category_name", "amount", "category_id") VALUES ($1, $2, $3, $4, $5, $6);';
-            db.query(queryText, [req.body.date, req.user.id, req.body.description, req.body.category_name, req.body.amount, req.body.category_id], function (error, result) {
-                done();
-                if (error) {
-                    console.log('Error making query', error);
-                    res.sendStatus(500);
-                } else {
-                    res.sendStatus(201);
-                }
-            }); // End query
-        }
-    }); // End Pool
+    if (req.isAuthenticated()) {
+        // req.user.id is the user row
+        console.log('transaction POST route', req.body);
+        pool.connect(function(error, db, done) {
+            if (error) {
+                console.log(error);
+                res.sendStatus(500);
+            } else {
+                var queryText = 'INSERT INTO "transactions" ("date", "user_id", "description", "category_name", "amount", "category_id") VALUES ($1, $2, $3, $4, $5, $6);';
+                db.query(queryText, [req.body.date, req.user.id, req.body.description, req.body.category_name, req.body.amount, req.body.category_id], function (error, result) {
+                    done();
+                    if (error) {
+                        console.log('Error making query', error);
+                        res.sendStatus(500);
+                    } else {
+                        res.sendStatus(201);
+                    }
+                }); // End query
+            }
+        }); // End Pool
+    } else {
+        res.sendStatus(401);
+    }
 }); // End POST Route
+
 // //GET category
 // router.getCategories('/', function (req, res) {
 //     pool.connect(function (error, db, done) {
@@ -52,24 +57,28 @@ router.post('/', function (req,res) {
 
 // Handles Ajax request for getting transactions--GET Route
 router.get('/', function(req,res) {
-    pool.connect (function (error, db, done) {
-        console.log('get /transaction route');
-        if (error) {
-            console.log(error);
-            res.sendStatus(500);
-        } else {
-            var queryText = 'SELECT "transactions"."category_id", "transactions"."id", "transactions"."date", "transactions"."description", "categories"."category_name", "transactions"."amount", "transactions"."user_id" FROM "transactions" INNER JOIN "categories" ON "transactions"."category_id" = "categories"."id" WHERE "transactions"."user_id" = $1;';
-            db.query(queryText, [req.user.id], function (error, result){
-                done();
-                if (error) {
-                    console.log('error making query', error);
-                    res.sendStatus(500);
-                } else {
-                    res.send(result.rows);
-                }
-            }); // End query
-        }
-    }); // End pool
+    if (req.isAuthenticated()) {
+        pool.connect (function (error, db, done) {
+            console.log('get /transaction route');
+            if (error) {
+                console.log(error);
+                res.sendStatus(500);
+            } else {
+                var queryText = 'SELECT "transactions"."category_id", "transactions"."id", "transactions"."date", "transactions"."description", "categories"."category_name", "transactions"."amount", "transactions"."user_id" FROM "transactions" INNER JOIN "categories" ON "transactions"."category_id" = "categories"."id" WHERE "transactions"."user_id" = $1;';
+                db.query(queryText, [req.user.id], function (error, result){
+                    done();
+                    if (error) {
+                        console.log('error making query', error);
+                        res.sendStatus(500);
+                    } else {
+                        res.send(result.rows);
+                    }
+                }); // End query
+            }
+        }); // End pool
+    } else {
+        res.sendStatus(401);
+    }
 }); // End GET Route
 
 // DELETE Route to delete a single transaction

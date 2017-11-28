@@ -60,24 +60,28 @@ router.post('/', function (req,res){
 
 // GET category
 router.get('/', function (req, res) {
-    pool.connect(function (error, db, done) {
-        console.log('get /budget route');
-        if (error) {
-            console.log(error);
-            res.sendStatus(500);
-        } else {
-            var queryText = 'SELECT "categories"."id", "categories"."user_id", "categories"."category_name", "categories"."amount" FROM "categories" INNER JOIN "users" ON "categories"."user_id" = "users"."id" WHERE "categories"."user_id" = $1;';
-            db.query(queryText, [req.user.id], function (error, result) {
-                done();
-                if (error) {
-                    console.log('error making query', error);
-                    res.sendStatus(500);
-                } else {
-                    res.send(result.rows);
-                }
-            }); // End query
-        }
-    }); // End pool
+    if (req.isAuthenticated()) {
+        pool.connect(function (error, db, done) {
+            console.log('get /budget route');
+            if (error) {
+                console.log(error);
+                res.sendStatus(500);
+            } else {
+                var queryText = 'SELECT "categories"."id", "categories"."user_id", "categories"."category_name", "categories"."amount" FROM "categories" INNER JOIN "users" ON "categories"."user_id" = "users"."id" WHERE "categories"."user_id" = $1;';
+                db.query(queryText, [req.user.id], function (error, result) {
+                    done();
+                    if (error) {
+                        console.log('error making query', error);
+                        res.sendStatus(500);
+                    } else {
+                        res.send(result.rows);
+                    }
+                }); // End query
+            }
+        }); // End pool
+    } else {
+        sendStatus(401);
+    }
 }); // End GET Route
 
 // DELETE a category budget
