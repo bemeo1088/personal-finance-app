@@ -147,6 +147,6 @@ section {
   padding-bottom: 5px;
 }
 
-li.last {
+.logout {
   float:right !important;
 }
