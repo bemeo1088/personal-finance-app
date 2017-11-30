@@ -148,5 +148,32 @@ section {
 }
 
 .logout {
-  float:right !important;
+  /* float:right !important; */
+  position: absolute;
+  top: 0px;
+  right: 5px;
+  z-index: 9999;
+}
+
+/* .transactionTbl {
+  justify-content: space-between;
+} */
+
+.dialogForm {
+  width: 100%;
+  text-align: center;
+  position: relative;
+}
+
+.dialogForm #popupContainer {
+  position: relative;
+  margin-top: 50px;
+}
+
+h2 {
+  text-align: center;
+}
+
+.formData {
+  padding: 50px;
 }

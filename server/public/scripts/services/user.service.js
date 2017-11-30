@@ -27,9 +27,26 @@ myApp.service('UserService', function($http, $location){
 
   self.logout = function() {
     console.log('UserService -- logout');
-    $http.get('/user/logout').then(function(response) {
-      console.log('UserService -- logout -- logged out');
-      $location.path("/home");
+      swal({
+        title: "Are you sure to log out?",
+        icon: "warning",
+        buttons: ['No!', 'Yes!'],
+        dangerMode: true     
+    }).then(function (willLogout) {
+      if(willLogout) {
+        swal("Bye Bye", {icon: "success"});
+        $http.get('/user/logout').then(function (response) {
+          console.log('UserService -- logout -- logged out');
+          $location.path("/home");
+        }).catch(function(error){
+          console.log('nuts');  
+        });
+      } else {
+        // $location.path("/user");
+        swal("Feel free to stay");
+        // self.getuser();
+      }
     });
-  }
+  };
 });
+

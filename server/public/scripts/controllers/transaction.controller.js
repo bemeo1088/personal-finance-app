@@ -1,4 +1,4 @@
-myApp.controller('TransactionController', function (UserService, $http) {
+myApp.controller('TransactionController', function ($scope, UserService, $http, $mdDialog) {
     console.log('TransactionController created');
     var vm = this;
     vm.userService = UserService;
@@ -39,28 +39,35 @@ myApp.controller('TransactionController', function (UserService, $http) {
             return '';
     }
 
+    // VIEW transactions
+    vm.viewTransaction = function () {
+        $http.get('/transaction').then(function (response) {
+            console.log('success');
+            console.log(response.data);
+        
+            vm.transactionList = response.data;
+            vm.editing = false;            // To set Edit mode to False
+                //$scope.message = "Timeout called!";
+        }).catch(function (error) {
+            console.log('failure', error);
+        });
+    }
+
     // ADD transactions
     vm.addTransaction = function (transactionToAdd, name, id) {
         console.log("aaaa:", name, id);
         transactionToAdd.category_name = name;
         transactionToAdd.category_id = id;
         $http.post('/transaction', transactionToAdd).then(function (response) {
-            //console.log('success');
+            console.log('success adding transaction');
+            $mdDialog.hide();
             vm.viewTransaction();
+            
         }).catch(function (error) {
             console.log('failure', error);      
         });
     }
-    // VIEW transactions
-    vm.viewTransaction = function () {
-        $http.get('/transaction').then(function (response) {
-            console.log('success');
-            vm.transactionList = response.data;
-            vm.editing = false;            // To set Edit mode to False
-        }).catch(function (error) {
-            console.log('failure', error);    
-        });
-    }
+    
     
     vm.categoryList = [];
     // VIEW Categories
@@ -77,23 +84,34 @@ myApp.controller('TransactionController', function (UserService, $http) {
 
     // DELETE Transactions
     vm.deleteTransaction = function (transactionId) {
-        $http.delete('/transaction/' + transactionId).then (function (response) {
-            console.log('success');
-            vm.viewTransaction();
-        }).catch( function (error) {
-            console.log('failure');   
-        });
+        console.log('deleted', transactionId);
+        swal({
+            title: "Are you sure?",
+            text: "You won't be able to revert this.",
+            icon: "warning",
+            buttons: ['No!', 'Yes, delete it!'],
+            dangerMode: true
+        }).then(function (willDelete) {
+            if (willDelete) {
+                swal('Deleted', "Your transaction has been deleted", {icon: "success"});
+                $http.delete('/transaction/' + transactionId).then(function (response) {
+                    console.log('success');
+                    vm.viewTransaction();
+                }).catch(function (error) {
+                    console.log('failure');
+                });
+            }            
+        });        
     }
-
-   
 
 
     // EDIT Transactions
-    vm.editTransaction = function (transaction) {
-        console.log(transaction);
-        $http.put('/transaction/' + transaction.id, transaction).then (function (response) { 
+    vm.editTransaction = function () {
+        console.log(vm.transaction);
+        $http.put('/transaction/' + transaction.id, vm.transaction).then (function (response) { 
             console.log('success');
             vm.viewTransaction();
+            $mdDialog.cancel();
         }).catch(function (error) {
             console.log('failure');    
         });
@@ -109,6 +127,16 @@ myApp.controller('TransactionController', function (UserService, $http) {
              id: transaction.id
          };
 
+    }
+
+    // Open dialog window
+    vm.openWindow = function () {
+        $mdDialog.show({
+            templateUrl: '../views/templates/addTransaction.html',
+            controller: 'TransactionController as tc',
+            clickOutsideToClose: true
+
+        })
     }
 
     vm.viewTransaction();

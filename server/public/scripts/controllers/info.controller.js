@@ -10,7 +10,7 @@ myApp.controller('InfoController', function(UserService, $http) {
 
   // Chart: Global Options
   Chart.defaults.global.defaultFontFamily = 'Lato';
-  Chart.defaults.global.defaultFontSize = 9;
+  Chart.defaults.global.defaultFontSize = 15;
   Chart.defaults.global.defaultFontColor = '#777';
 
   // GET CHART
@@ -90,7 +90,7 @@ myApp.controller('InfoController', function(UserService, $http) {
             title: {
               display: true,
               text: 'Budgets vs. Transactions of the month',
-              fontSize: 25
+              fontSize: 30
             },
             legend: {
               position: 'right',

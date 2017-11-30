@@ -88,16 +88,27 @@ myApp.controller('BudgetController', function (UserService, $http, $mdDialog) {
             vm.deleteCategory());
     }
 
-    
+
     // DELETE categories
     vm.deleteCategory = function (categoryId) {
-        $http.delete('/budget/' + categoryId).then(function(response){
-            console.log('success');
-            vm.viewCategory();
+        swal({
+            title: "Are you sure?",
+            text: "You won't be able to revert this.",
+            icon: "warning",
+            buttons: ['No!', 'Yes, delete it!'],
+            dangerMode: true
+        }).then(function (willDelete) {
+            if (willDelete) {
+                swal('Deleted', "Your budget has been deleted", { icon: "success" });
+                $http.delete('/budget/' + categoryId).then(function(response){
+                console.log('success');
+                vm.viewCategory();
         }).catch(function(error){
             console.log('failure');
         });
     }
+});
+}
     
     vm.viewCategory();
 
