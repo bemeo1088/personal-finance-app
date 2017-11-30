@@ -1,4 +1,4 @@
-myApp.controller('BudgetController', function (UserService, $http) {
+myApp.controller('BudgetController', function (UserService, $http, $mdDialog) {
     console.log('BudgetController created');
     var vm = this;
     vm.userService = UserService;
@@ -75,6 +75,20 @@ myApp.controller('BudgetController', function (UserService, $http) {
         console.log('remainingBalance', vm.remainingBalance);
     }
 
+
+
+    // CONFIRM DELETE BUTTON
+    vm.showConfirm = function (ev) {
+        var confirm = $mdDialog.confirm()
+            .title('Would you like to delete your budget?')
+            .targetEvent(ev)
+            .ok('Delete')
+            .cancel('Cancel');
+        $mdDialog.show(confirm).then(
+            vm.deleteCategory());
+    }
+
+    
     // DELETE categories
     vm.deleteCategory = function (categoryId) {
         $http.delete('/budget/' + categoryId).then(function(response){
@@ -87,7 +101,6 @@ myApp.controller('BudgetController', function (UserService, $http) {
     
     vm.viewCategory();
 
-    
 
     // Budgets Chart
     vm.budgetChart = [];
@@ -96,7 +109,7 @@ myApp.controller('BudgetController', function (UserService, $http) {
 
     // Chart: Global Options
     Chart.defaults.global.defaultFontFamily = 'Lato';
-    Chart.defaults.global.defaultFontSize = 9;
+    Chart.defaults.global.defaultFontSize = 15;
     Chart.defaults.global.defaultFontColor = '#777';
 
     // GET CHART
@@ -175,7 +188,7 @@ myApp.controller('BudgetController', function (UserService, $http) {
                         title: {
                             display: true,
                             text: 'Budgets of the month',
-                            fontSize: 25
+                            fontSize: 30
                         },
                         legend: {
                             position: 'right',

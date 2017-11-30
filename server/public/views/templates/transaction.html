@@ -17,64 +17,67 @@
             </div>
         </div>
 
+      
 
 
         <form name="frm">
-            <!-- Date: <input id="date" type="date" ng-model="tc.transaction.date" required /> -->
+            Date: <input id="date" type="date" ng-model="tc.transaction.date" required />
             Description: <input id="description" type="text" ng-value ="tc.transaction.description" ng-model="tc.transaction.description" required/>
             Category:   <select ng-model = "category_name" ng-value ="tc.transaction.category_name" ng-options = "category_name as category_name.category_name for category_name in tc.categoryList">
                         </select>
             Category ID: <input id="categoryId" type="text" ng-value="tc.transaction.category_id" ng-model="category_name.id" />
             Amount: <input type="text" ng-value="tc.transaction.amount" ng-model="tc.transaction.amount" />          
-            <button ng-hide="tc.editing" type="submit" ng-click="tc.addTransaction(tc.transaction, category_name.category_name, category_name.id)">Add</button>
-            <button ng-show="tc.editing" type="submit" ng-click="tc.editTransaction(tc.transaction)">Update</button>
+            <button class="md-raised md-primary" ng-hide="tc.editing" type="submit" ng-click="tc.addTransaction(tc.transaction, category_name.category_name, category_name.id)">Add</button>
+            <button class="md-raised md-primary" ng-show="tc.editing" type="submit" ng-click="tc.editTransaction(tc.transaction)">Update</button>
         </form>
 
-            <h2 class="md-title">RECORDS FOR TRANSACTIONS</h2>
+            <h2 class="md-title">RECORDS FOR TRANSACTIONS</h2><br>
             <div class="searchBar">
-                Search: <input type="text" placeholder="Search..." ng-model="searchText" />    
+                <md-icon md-svg-icon="images/search.svg"></md-icon> <input type="text" placeholder="Search..." ng-model="searchText" />    
             </div>
             <br><br>
-            <table>
-                <thead>
-                    <tr>
-                        <th ng-click="tc.sortData('id')">Transaction ID
-                            <div ng-class="tc.getSortClass('id')"></div>
-                        </th>
-                        <th ng-click="tc.sortData('date')">Date
-                            <div ng-class="tc.getSortClass('date')"></div>
-                        </th>
-                        <th ng-click="tc.sortData('description')">Description
-                            <div ng-class="tc.getSortClass('description')"></div>
-                        </th>
-                        <th ng-click="tc.sortData('category_id')">Category ID
-                            <div ng-class="tc.getSortClass('category_id')"></div>
-                        </th>
-                        <th ng-click="tc.sortData('category_name')">Category Name
-                            <div ng-class="tc.getSortClass('category_name')"></div>
-                        </th>
-                        <th ng-click="tc.sortData('amount')">Amount
-                            <div ng-class="tc.getSortClass('amount')"></div>
-                        </th>
-                        <th ng-click="tc.sortData('user_id')">User ID
-                            <div ng-class="tc.getSortClass('user_id')"></div>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="transaction in tc.transactionList | orderBy:tc.sortColumn:tc.reverseSort | filter:searchText">
-                        <td>{{transaction.id}}</td>
-                        <td>{{transaction.date | date: "MM/dd/yyyy"}}</td>
-                        <td>{{transaction.description | uppercase}}</td>
-                        <td>{{transaction.category_id}}</td>
-                        <td>{{transaction.category_name | uppercase}}</td>
-                        <td>{{transaction.amount | currency: "$"}}</td>
-                        <td>{{transaction.user_id}}</td>
-                        <td><button type="submit" ng-click="tc.deleteTransaction(transaction.id)">Delete</button></td>
-                        <td><button type="submit" ng-click="tc.editClicked(transaction)">Edit</button></td>
-                    </tr>
-                </tbody>
-            </table>
+            <md-table-container>
+                <table md-table>
+                    <thead md-head>
+                        <tr md-row>
+                            <th ng-click="tc.sortData('id')">Transaction ID
+                                <div ng-class="tc.getSortClass('id')"></div>
+                            </th>
+                            <th ng-click="tc.sortData('date')">Date
+                                <div ng-class="tc.getSortClass('date')"></div>
+                            </th>
+                            <th ng-click="tc.sortData('description')">Description
+                                <div ng-class="tc.getSortClass('description')"></div>
+                            </th>
+                            <th ng-click="tc.sortData('category_id')">Category ID
+                                <div ng-class="tc.getSortClass('category_id')"></div>
+                            </th>
+                            <th ng-click="tc.sortData('category_name')">Category Name
+                                <div ng-class="tc.getSortClass('category_name')"></div>
+                            </th>
+                            <th ng-click="tc.sortData('amount')">Amount
+                                <div ng-class="tc.getSortClass('amount')"></div>
+                            </th>
+                            <th ng-click="tc.sortData('user_id')">User ID
+                                <div ng-class="tc.getSortClass('user_id')"></div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody md-body>
+                        <tr md-row ng-repeat="transaction in tc.transactionList | orderBy:tc.sortColumn:tc.reverseSort | filter:searchText">
+                            <td md-cell>{{transaction.id}}</td>
+                            <td md-cell>{{transaction.date | date: "MM/dd/yyyy"}}</td>
+                            <td md-cell>{{transaction.description | uppercase}}</td>
+                            <td md-cell>{{transaction.category_id}}</td>
+                            <td md-cell>{{transaction.category_name | uppercase}}</td>
+                            <td md-cell>{{transaction.amount | currency: "$"}}</td>
+                            <td md-cell>{{transaction.user_id}}</td>
+                            <td><button md-button class="sm-raised sm-secondary" type="submit" ng-click="tc.editClicked(transaction)"><md-icon md-svg-icon="images/edit.svg"></md-icon></button></td>
+                            <td><button md-button class="sm-raised sm-secondary" type="submit" ng-click="tc.deleteTransaction(transaction.id)"><md-icon md-svg-icon="images/trash.svg"></md-icon></button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </md-table-container>
     </div>
    
 </div>

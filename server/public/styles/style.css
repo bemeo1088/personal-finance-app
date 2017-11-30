@@ -132,3 +132,21 @@ th,td {
 #label {
   color: grey;
 }
+
+.showChart {
+  display: center;
+  /* width: 70%; */
+  
+}
+
+#myBudgetChart {
+  display: inline;
+}
+
+section {
+  padding-bottom: 5px;
+}
+
+li.last {
+  float:right !important;
+}

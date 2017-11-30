@@ -29,7 +29,7 @@
 
                     <md-input-container class="md-block">
                             <label>Amount</label>
-                            <input ng-model="bc.category.amount" type="text">
+                            <input ng-model="bc.category.amount" type="text" placeholder="$ 0.00">
                     </md-input-container>
                         
                     
@@ -68,6 +68,8 @@
                 <span>Budgets List</span>
             </div>
         </md-toolbar> -->
+
+        <!-- BUDGETS LIST TABLE -->
         <h1 class="md-title">BUDGETS LIST</h1><br>
         <md-table-container>
             <table md-table>
@@ -85,7 +87,9 @@
                         <td md-cell>{{category.user_id}}</td>
                         <td md-cell>{{category.category_name}}</td>
                         <td md-cell>{{category.amount | currency:"$"}}</td>
-                        <td><md-button class="sm-raised sm-secondary" type="submit" ng-click="bc.deleteCategory(category.id)">Remove</button></td>
+                        <td>
+                            <md-button class="sm-raised sm-secondary" type="submit" ng-click="bc.deleteCategory(category.id)" ng-click="showConfirm($event)"><md-icon md-svg-icon="images/trash.svg"></md-icon></button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -105,13 +109,17 @@
             </div>
             <br>
 
-            <div>
-                <!-- SHOW CHART -->
-                <md-button class="md-raised md-primary" type="submit" ng-click="bc.requestBudgetChart()">Show Chart</md-button>
-            
-                <div style="width: 70%;">
+            <!-- SHOW CHART -->
+            <div class="showChart">                
+                <div>
+                    <md-button class="md-raised md-primary" type="submit" ng-click="bc.requestBudgetChart()"><md-icon md-svg-icon="images/pieChart.svg"></md-icon> Show Chart</md-button>
+                </div>                
+            <br>
+                <div>
                     <canvas id="myBudgetChart" height="300" width="300"></canvas>
                 </div>
+                    
+                
             </div>
     </div>
    
