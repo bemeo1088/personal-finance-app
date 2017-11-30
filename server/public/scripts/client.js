@@ -49,6 +49,15 @@ myApp.config(function($routeProvider, $locationProvider) {
         }
       }
     })
+    .when('/editTransaction', {
+      templateUrl: 'views/templates/editTransaction.html',
+      controller: 'EditTransactionController as ec',
+      resolve: {
+        getuser: function (UserService) {
+          return UserService.getuser();
+        }
+      }
+    })
     .otherwise({
       redirectTo: 'home'
     });

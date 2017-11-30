@@ -1,0 +1,33 @@
+<div class="md-padding dialogForm" id="popupContainer">
+    <!-- <form name="frm" layout="column"> -->
+    <md-dialog>
+        <form>
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <h2>Add Your Transactions</h2>
+                    <span flex></span>
+                    <md-button class="md-icon-button" ng-click="dialog.cancel()"></md-button>
+                </div>
+            </md-toolbar>
+
+            <md-dialog-content>
+                <div class="formData">
+                    <form>
+                        Date:
+                        <input id="date" type="date" ng-model="tc.transaction.date" required />
+                        <br> Description:
+                        <input id="description" type="text" ng-value="tc.transaction.description" ng-model="tc.transaction.description" required/>
+                        <br> Category:
+                        <select ng-model="category_name" ng-value="tc.transaction.category_name" ng-options="category_name as category_name.category_name for category_name in tc.categoryList">
+                        </select>
+                        <br> Category ID:
+                        <input id="categoryId" type="text" ng-value="tc.transaction.category_id" ng-model="category_name.id" /> Amount:
+                        <input type="text" ng-value="tc.transaction.amount" ng-model="tc.transaction.amount" />
+                        <md-button class="md-raised md-primary" ng-hide="tc.editing" type="submit" ng-click="tc.addTransaction(tc.transaction, category_name.category_name, category_name.id)">Add</md-button>
+                        <md-button class="md-raised md-primary" ng-show="tc.editing" type="submit" ng-click="tc.editTransaction()">Update</md-button>
+                    </form>
+                </div>
+
+        </form>
+    </md-dialog>
+</div>
