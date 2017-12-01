@@ -145,15 +145,15 @@ myApp.controller('TransactionController', function ($scope, UserService, $http, 
     }
 
     vm.editClicked = function (transaction) {
-        vm.editing = true;
         DataService.selectedTransaction.data = {
             date : new Date(transaction.date),
             description : transaction.description,
+            category_name: transaction.category_name,
             category_id: transaction.category_id,
             amount: transaction.amount,
             id: transaction.id
         };
-
+        vm.openEditWindow();
     }
 
     // Open dialog window
@@ -164,6 +164,16 @@ myApp.controller('TransactionController', function ($scope, UserService, $http, 
             clickOutsideToClose: true
 
         })
+    }
+
+    // Open dialog window
+    vm.openEditWindow = function () {
+        $mdDialog.show({
+            templateUrl: '../views/templates/editTransaction.html',
+            controller: 'EditTransactionController as ec',
+            clickOutsideToClose: true
+
+        });
     }
 
     vm.viewTransaction();

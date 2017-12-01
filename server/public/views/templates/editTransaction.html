@@ -4,7 +4,7 @@
         <form>
             <md-toolbar>
                 <div class="md-toolbar-tools">
-                    <h2>Add Your Transactions</h2>
+                    <h2>Edit Your Transactions</h2>
                     <span flex></span>
                     <md-button class="md-icon-button" ng-click="dialog.cancel()"></md-button>
                 </div>
@@ -14,17 +14,21 @@
                 <div class="formData">
                     <form>
                         Date:
-                        <input id="date" type="date" ng-model="tc.transaction.date" required />
-                        <br> Description:
-                        <input id="description" type="text" ng-value="tc.transaction.description" ng-model="tc.transaction.description" required/>
-                        <br> Category:
-                        <select ng-model="category_name" ng-value="tc.transaction.category_name" ng-options="category_name as category_name.category_name for category_name in tc.categoryList">
+                        <input id="date" type="date" ng-model="ec.dataService.selectedTransaction.data.date" required />
+                        <br> 
+                        Description:
+                        <input id="description" type="text" ng-model="ec.dataService.selectedTransaction.data.description" required/>
+                        <br> 
+                        Category:
+                        <select ng-model="category_name" ng-value="ec.dataService.selectedTransaction.data.category_name" ng-options="category_name as category_name.category_name for category_name in ec.categoryList">
                         </select>
-                        <br> Category ID:
-                        <input id="categoryId" type="text" ng-value="tc.transaction.category_id" ng-model="category_name.id" /> Amount:
-                        <input type="text" ng-value="tc.transaction.amount" ng-model="tc.transaction.amount" />
-                        <md-button class="md-raised md-primary" ng-hide="tc.editing" type="submit" ng-click="tc.addTransaction(tc.transaction, category_name.category_name, category_name.id)">Add</md-button>
-                        <md-button class="md-raised md-primary" ng-show="tc.editing" type="submit" ng-click="tc.editTransaction()">Update</md-button>
+                        <br> 
+                        Category ID:
+                        <input id="categoryId" type="text" ng-value="ec.dataService.selectedTransaction.data.category_id" ng-model="category_name.id" /> 
+                        Amount:
+                        <input type="text" ng-model="ec.dataService.selectedTransaction.data.amount" />
+                        <md-button class="md-raised md-primary" ng-hide="ec.editing" type="submit" ng-click="ec.editTransaction(ec.dataService.selectedTransaction.data, category_name.category_name, category_name.id)">Edit</md-button>
+                        <!-- <md-button class="md-raised md-primary" ng-show="ec.editing" type="submit" ng-click="ec.editTransaction()">Update</md-button> -->
                     </form>
                 </div>
 
