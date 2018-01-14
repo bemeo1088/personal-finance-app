@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp',['ngRoute', 'ngMaterial', 'md.data.table', 'ngSanitize', 'ngCsv']);
+var myApp = angular.module('myApp', ['ngRoute', 'ngMaterial', 'md.data.table', 'ngSanitize']);
 
 /// Routes ///
 myApp.config(function($routeProvider, $locationProvider) {
@@ -52,6 +52,15 @@ myApp.config(function($routeProvider, $locationProvider) {
     .when('/editTransaction', {
       templateUrl: 'views/templates/editTransaction.html',
       controller: 'EditTransactionController as ec',
+      resolve: {
+        getuser: function (UserService) {
+          return UserService.getuser();
+        }
+      }
+    })
+    .when('/technology', {
+      templateUrl: 'views/templates/technology.html',
+      controller: 'TransactionController as tc',
       resolve: {
         getuser: function (UserService) {
           return UserService.getuser();

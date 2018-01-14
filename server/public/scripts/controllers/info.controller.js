@@ -65,7 +65,7 @@ myApp.controller('InfoController', function(UserService, $http) {
               hoverBorderColor: '#000'
             },
             {
-              label: 'Category Amount',
+              label: 'Transaction Amounts',
               fill: true,
               lineTension: 0.1,
               data: transactionAmount,
@@ -87,6 +87,23 @@ myApp.controller('InfoController', function(UserService, $http) {
             ]
           },
           options: {
+            scales: {
+              yAxes: [{
+                scaleLabel: {
+                  display: true,
+                  labelString: 'Dollar Amount'
+                },
+                ticks: {
+                  beginAtZero: true
+                }
+              }],
+              xAxes: [{
+                scaleLabel: {
+                  display: true,
+                  labelString: 'Categories'
+                }
+              }]
+            },
             title: {
               display: true,
               text: 'Budgets vs. Transactions of the month',
@@ -106,7 +123,7 @@ myApp.controller('InfoController', function(UserService, $http) {
                 top: 0
               }
             },
-            tooltops: {
+            tooltips: {
               enabled: true
             }
           }

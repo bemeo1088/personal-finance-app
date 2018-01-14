@@ -89,7 +89,11 @@ myApp.controller('TransactionController', function ($scope, UserService, $http, 
             console.log('success adding transaction');
             $mdDialog.hide();
             vm.viewTransaction();
-            
+            vm.transaction.date = '';
+            vm.transaction.description = '';
+            vm.transaction.category_name = '';
+            vm.transaction.category_id = '';
+            vm.transaction.amount = '';   
         }).catch(function (error) {
             console.log('failure', error);      
         });
@@ -138,7 +142,7 @@ myApp.controller('TransactionController', function ($scope, UserService, $http, 
         $http.put('/transaction/' + transaction.id, vm.transaction).then (function (response) { 
             console.log('success');
             vm.viewTransaction();
-            $mdDialog.cancel();
+            $mdDialog.hide();
         }).catch(function (error) {
             console.log('failure');    
         });

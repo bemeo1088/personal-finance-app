@@ -40,9 +40,9 @@ myApp.controller('BudgetController', function (UserService, $http, $mdDialog) {
 
     vm.userInfo = {};
     vm.remainingBalance = 0;
+
     // VIEW categories
     vm.viewCategory = function () {
-
         $http.get('/budget').then(function (response){
             console.log('success', response);  
             vm.categoryList = response.data;  
@@ -77,16 +77,16 @@ myApp.controller('BudgetController', function (UserService, $http, $mdDialog) {
 
 
 
-    // CONFIRM DELETE BUTTON
-    vm.showConfirm = function (ev) {
-        var confirm = $mdDialog.confirm()
-            .title('Would you like to delete your budget?')
-            .targetEvent(ev)
-            .ok('Delete')
-            .cancel('Cancel');
-        $mdDialog.show(confirm).then(
-            vm.deleteCategory());
-    }
+    // // CONFIRM DELETE BUTTON
+    // vm.showConfirm = function (ev) {
+    //     var confirm = $mdDialog.confirm()
+    //         .title('Would you like to delete your budget?')
+    //         .targetEvent(ev)
+    //         .ok('Delete')
+    //         .cancel('Cancel');
+    //     $mdDialog.show(confirm).then(
+    //         vm.deleteCategory());
+    // }
 
 
     // DELETE categories

@@ -1,31 +1,30 @@
 <div ng-include="'views/partials/nav.html'"></div>
-<div class="container">
-    <!-- <div class="row">
-        <div class="col-xs-5">
-            <div class="progress">
-                <div class="progress-bar progress-bar-success progress-bar-striped active" style="width: 60%">60%</div>
+    <div class="container">
+        <!-- <div class="row">
+            <div class="col-xs-5">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success progress-bar-striped active" style="width: 60%">60%</div>
+                
+            
+                    <div class="progress-bar progress-bar-info progress-bar-striped active" style="width: 60%">60%</div>
             
         
-                <div class="progress-bar progress-bar-info progress-bar-striped active" style="width: 60%">60%</div>
+                    <div class="progress-bar progress-bar-info progress-bar-striped active" style="width: 60%">60%</div>
+            
+                    <div class="progress-bar progress-bar-warning progress-bar-striped active" style="width: 60%">60%</div>
         
-      
-                <div class="progress-bar progress-bar-info progress-bar-striped active" style="width: 60%">60%</div>
+                    <div class="progress-bar progress-bar-warning progress-bar-striped active" style="width: 60%">60%</div>
         
-                <div class="progress-bar progress-bar-warning progress-bar-striped active" style="width: 60%">60%</div>
-      
-                <div class="progress-bar progress-bar-warning progress-bar-striped active" style="width: 60%">60%</div>
-    
-                <div class="progress-bar progress-bar-danger progress-bar-striped active" style="width: 60%">60%</div>
+                    <div class="progress-bar progress-bar-danger progress-bar-striped active" style="width: 60%">60%</div>
+                </div>
             </div>
+        </div> -->
+
+        <p>
+            <md-button class="md-raised md-primary" ng-click="ic.requestChart()"><md-icon md-svg-icon="images/lineChart.svg"></md-icon> Show Chart</md-button>
+        </p>
+        <div style="width: 100%;">
+            <canvas id="myChart" height="1050" width="1200"></canvas>
         </div>
-    </div> -->
-
-    <p>
-      <md-button class="md-raised md-primary" ng-click="ic.requestChart()"><md-icon md-svg-icon="images/lineChart.svg"></md-icon> Show Chart</md-button>
-    </p>
-    <div style="width: 70%;">
-      <canvas id="myChart" height="750" width="700"></canvas>
     </div>
-
-  </div>
 </div>

@@ -1,4 +1,4 @@
-<div class="md-padding dialogForm" id="popupContainer">
+<div class="md-padding dialogForm" id="popupContainer" ng-cloak>
     <!-- <form name="frm" layout="column"> -->
     <md-dialog>
         <form>
@@ -13,25 +13,36 @@
             <md-dialog-content>
                 <div class="formData">
                     <form>
-                        Date:
-                        <input id="date" type="date" ng-model="ec.dataService.selectedTransaction.data.date" required />
-                        <br> 
-                        Description:
-                        <input id="description" type="text" ng-model="ec.dataService.selectedTransaction.data.description" required/>
-                        <br> 
-                        Category:
-                        <select ng-model="category_name" ng-value="ec.dataService.selectedTransaction.data.category_name" ng-options="category_name as category_name.category_name for category_name in ec.categoryList">
-                        </select>
-                        <br> 
-                        Category ID:
-                        <input id="categoryId" type="text" ng-value="ec.dataService.selectedTransaction.data.category_id" ng-model="category_name.id" /> 
-                        Amount:
-                        <input type="text" ng-model="ec.dataService.selectedTransaction.data.amount" />
-                        <md-button class="md-raised md-primary" ng-hide="ec.editing" type="submit" ng-click="ec.editTransaction(ec.dataService.selectedTransaction.data, category_name.category_name, category_name.id)">Edit</md-button>
+                        <md-input-container>
+                            <label>Date</label>
+                            <input id="date" type="date" ng-model="ec.dataService.selectedTransaction.data.date" required />
+                        </md-input-container>
+                        
+                        <md-input-container>
+                            <label>Description</label>                        
+                            <input id="description" type="text" ng-model="ec.dataService.selectedTransaction.data.description" required/>
+                        </md-input-container>
+                    
+                        <md-input-container>
+                            <select ng-model="category_name" ng-options="category_name as category_name.category_name for category_name in ec.categoryList">
+                            </select>
+                        </md-input-container>
+
+                        <md-input-container>
+                            <label>Category ID</label>                        
+                            <input id="categoryId" type="text" ng-value="ec.dataService.selectedTransaction.data.category_id" ng-model="category_name.id" /> 
+                        </md-input-container>
+
+                        <md-input-container>
+                            <label>Amount</label>
+                            <input type="text" ng-model="ec.dataService.selectedTransaction.data.amount" />
+                        </md-input-container>
+
+                            <md-button class="md-raised md-primary" ng-hide="ec.editing" type="submit" ng-click="ec.editTransaction(ec.dataService.selectedTransaction.data, category_name.category_name, category_name.id)">Edit</md-button>
                         <!-- <md-button class="md-raised md-primary" ng-show="ec.editing" type="submit" ng-click="ec.editTransaction()">Update</md-button> -->
                     </form>
                 </div>
-
+            </md-input-container>
         </form>
     </md-dialog>
 </div>

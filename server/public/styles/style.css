@@ -135,8 +135,7 @@ th,td {
 
 .showChart {
   display: center;
-  /* width: 70%; */
-  
+  /* width: 70%; */  
 }
 
 #myBudgetChart {
@@ -176,4 +175,25 @@ h2 {
 
 .formData {
   padding: 50px;
+}
+
+.technology {
+  background-image: url('/images/technology.jpg');
+  height: 350px;
+  width: 1300px;
+}
+
+ul.technologyList {
+  list-style-type: square;
+}
+
+/* .instructions {
+  background-image: url('/images/money.jpg');
+  width: 2000px;
+  
+} */
+
+#welcome {
+  font-weight: bold;
+  color: gray;
 }

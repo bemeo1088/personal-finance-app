@@ -1,7 +1,9 @@
-myApp.controller('EditTransactionController', function ($scope, $http, $mdDialog, DataService) {
+myApp.controller('EditTransactionController', function ($scope, $http, $mdDialog, DataService, UserService) {
     console.log('EditTransactionController created');
     var vm = this;
     vm.dataService = DataService;
+
+    vm.userService = UserService;
 
     vm.editing = false; // decide whether we want to go to Post route (adding) or Put route (editing)
     vm.editingId = 0; 
@@ -36,6 +38,7 @@ myApp.controller('EditTransactionController', function ($scope, $http, $mdDialog
     }
 
     vm.categoryList = [];
+
     // VIEW Categories
     vm.viewCategory = function () {
         $http.get('/budget').then(function (response) {
